@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustOrbit Chat Test Client</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; margin-bottom: 20px; }
+        .section { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 4px; }
+        .section h2 { font-size: 16px; margin-bottom: 10px; color: #666; }
+        input, button { padding: 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 4px; }
+        input { width: 100%; margin-bottom: 10px; }
+        button { background: #007bff; color: white; border: none; cursor: pointer; margin-right: 5px; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .messages { height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; background: white; border-radius: 4px; margin-bottom: 10px; }
+        .message { margin-bottom: 8px; padding: 8px; background: #e3f2fd; border-radius: 4px; font-size: 13px; }
+        .message.sent { background: #c8e6c9; }
+        .message.error { background: #ffcdd2; color: #c62828; }
+        .message.system { background: #fff3e0; color: #e65100; }
+        .status { display: inline-block; padding: 4px 8px; border-radius: 3px; font-size: 12px; font-weight: bold; }
+        .status.connected { background: #4caf50; color: white; }
+        .status.disconnected { background: #f44336; color: white; }
+        .inline-group { display: flex; gap: 10px; }
+        .inline-group input { flex: 1; }
+        .info { background: #e3f2fd; padding: 10px; border-radius: 4px; font-size: 13px; color: #1976d2; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 TrustOrbit Chat Test Client</h1>
+        
+        <div class="info">
+            <strong>Status:</strong> <span class="status disconnected" id="status">Disconnected</span><br>
+            <strong>User ID:</strong> <span id="userId">Not connected</span>
+        </div>
+
+        <div class="section">
+            <h2>1️⃣ Authentication</h2>
+            <input type="text" id="token" placeholder="Paste your JWT token here">
+            <button onclick="connect()">Connect to Chat</button>
+            <button onclick="disconnect()">Disconnect</button>
+        </div>
+
+        <div class="section">
+            <h2>2️⃣ Join a Contract Chat</h2>
+            <div class="inline-group">
+                <input type="text" id="contractId" placeholder="Contract UUID">
+                <button onclick="joinChat()">Join Chat</button>
+                <button onclick="leaveChat()">Leave Chat</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3️⃣ Messages</h2>
+            <div class="messages" id="messages"></div>
+            <div class="inline-group">
+                <input type="text" id="messageInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+                <button onclick="clearMessages()">Clear</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 Testing Instructions</h2>
+            <ol style="padding-left: 20px; color: #666; font-size: 14px;">
+                <li>Start your backend server: <code>npm run dev</code></li>
+                <li>Login via API to get a JWT token</li>
+                <li>Paste the token and click "Connect to Chat"</li>
+                <li>Create/get a contract ID from the database</li>
+                <li>Enter contract ID and click "Join Chat"</li>
+                <li>Open this page in another browser/tab with a different user's token</li>
+                <li>Send messages between users</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let currentContractId = null;
+
+        function addMessage(text, type = 'system') {
+            const messagesDiv = document.getElementById('messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${type}`;
+            msgDiv.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+            messagesDiv.appendChild(msgDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function updateStatus(connected, userId = null) {
+            const statusEl = document.getElementById('status');
+            const userIdEl = document.getElementById('userId');
+            
+            if (connected) {
+                statusEl.textContent = 'Connected';
+                statusEl.className = 'status connected';
+                userIdEl.textContent = userId || 'Connected';
+            } else {
+                statusEl.textContent = 'Disconnected';
+                statusEl.className = 'status disconnected';
+                userIdEl.textContent = 'Not connected';
+            }
+        }
+
+        function connect() {
+            const token = document.getElementById('token').value.trim();
+            if (!token) {
+                alert('Please enter your JWT token');
+                return;
+            }
+
+            if (ws) {
+                ws.close();
+            }
+
+            // Connect to WebSocket with token as query parameter
+            ws = new WebSocket(`ws://localhost:5000/ws/chat?token=${token}`);
+
+            ws.onopen = () => {
+                addMessage('WebSocket connection opened', 'system');
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    console.log('Received:', data);
+
+                    switch(data.type) {
+                        case 'connected':
+                            updateStatus(true, data.userId);
+                            addMessage(`✅ Connected as user: ${data.userId}`, 'system');
+                            break;
+                        
+                        case 'joined_chat':
+                            currentContractId = data.contractId;
+                            addMessage(`✅ Joined chat for contract: ${data.contractId}`, 'system');
+                            break;
+                        
+                        case 'left_chat':
+                            addMessage(`✅ Left chat for contract: ${data.contractId}`, 'system');
+                            currentContractId = null;
+                            break;
+                        
+                        case 'message_created':
+                            const msg = data.message;
+                            addMessage(`💬 ${msg.sender_id.substring(0, 8)}: ${msg.body}`, 'received');
+                            break;
+                        
+                        case 'notification_created':
+                            addMessage(`🔔 Notification: ${data.notification.message}`, 'system');
+                            break;
+                        
+                        case 'error':
+                            addMessage(`❌ Error: ${data.message}`, 'error');
+                            break;
+                        
+                        default:
+                            addMessage(`Unknown message type: ${data.type}`, 'system');
+                    }
+                } catch (error) {
+                    addMessage(`Parse error: ${error.message}`, 'error');
+                }
+            };
+
+            ws.onerror = (error) => {
+                addMessage('❌ WebSocket error occurred', 'error');
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onclose = () => {
+                updateStatus(false);
+                addMessage('WebSocket connection closed', 'system');
+                ws = null;
+            };
+        }
+
+        function disconnect() {
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+        }
+
+        function joinChat() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                alert('Not connected. Please connect first.');
+                return;
+            }
+
+            const contractId = document.getElementById('contractId').value.trim();
+            if (!contractId) {
+                alert('Please enter a contract ID');
+                return;
+            }
+
+            ws.send(JSON.stringify({
+                type: 'join_chat',
+                contractId: contractId
+            }));
+        }
+
+        function leaveChat() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                alert('Not connected.');
+                return;
+            }
+
+            ws.send(JSON.stringify({
+                type: 'leave_chat'
+            }));
+        }
+
+        function sendMessage() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                alert('Not connected. Please connect first.');
+                return;
+            }
+
+            if (!currentContractId) {
+                alert('Please join a contract chat first.');
+                return;
+            }
+
+            const messageInput = document.getElementById('messageInput');
+            const body = messageInput.value.trim();
+            
+            if (!body) {
+                alert('Please enter a message');
+                return;
+            }
+
+            ws.send(JSON.stringify({
+                type: 'send_message',
+                contractId: currentContractId,
+                body: body
+            }));
+
+            addMessage(`📤 You: ${body}`, 'sent');
+            messageInput.value = '';
+        }
+
+        function clearMessages() {
+            document.getElementById('messages').innerHTML = '';
+        }
+
+        // Auto-fill contract ID if provided in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('contractId')) {
+            document.getElementById('contractId').value = urlParams.get('contractId');
+        }
+    </script>
+</body>
+</html>
