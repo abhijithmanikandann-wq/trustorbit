@@ -10,6 +10,7 @@ import projectRoutes from './routes/projectRoutes.js';
 import contractRoutes from './routes/contractRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ const app = express();
 
 app.use(cors({ origin: process.env.CLIENT_URL || true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.get('/', (_request, response) => {
@@ -29,6 +31,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/contracts', contractRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/payments', paymentRoutes);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

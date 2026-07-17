@@ -32,3 +32,11 @@ PostgreSQL is available at `localhost:5433`. The initial schema is executed auto
 - `POST/GET /api/projects`, `POST /api/projects/:projectId/proposals`
 - `GET /api/contracts`, `PATCH /api/contracts/:contractId/accept`
 - `GET /api/dashboard`, `GET /api/notifications`
+
+## Soroban escrow payments
+
+Install dependencies after pulling these changes with `npm.cmd install`, then configure `SOROBAN_RPC_URL`, `SOROBAN_NETWORK`, and `SOROBAN_ESCROW_CONTRACT_ID` in `.env`. The backend never accepts or stores a wallet private key.
+
+The authenticated client creates a deposit with `POST /api/payments/contracts/:contractId/prepare`. The response contains `prepared.preparedTransactionXdr`, which the frontend signs with Freighter and submits to Soroban RPC. Call `POST /api/payments/:paymentId/sync` with `{ "transactionHash": "..." }` to persist its RPC status. A held payment can be prepared for release or refund by the client with `POST /api/payments/:paymentId/prepare-action` and `{ "action": "release" }` or `{ "action": "refund" }`. `GET /api/payments/contracts/:contractId` lists payments for either contract participant.
+
+The default ABI assumptions are `deposit(payer: Address, payee: Address, amount: i128, contract_id: String)`, `release(payee: Address, amount: i128, contract_id: String)`, and `refund(payer: Address, amount: i128, contract_id: String)`. They are only defaults: set `SOROBAN_*_METHOD` and `SOROBAN_*_ARGUMENTS` to match the deployed contract exactly. Argument settings are JSON arrays containing mapping names (`payer`, `payee`, `amount_stroops`, `contract_id`, `payment_id`) or descriptors such as `{ "name": "amount_stroops", "type": "i128" }`. Amounts are converted from XLM to 7-decimal stroops before invocation.
