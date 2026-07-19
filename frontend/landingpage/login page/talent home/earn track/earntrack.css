@@ -1,0 +1,206 @@
+:root {
+    --bg-color-start: #0a2342;    --bg-color-end: #020914;
+    --bg-glow-1: #1f508a;
+    --bg-glow-2: #0d2e5a;
+    --card-bg: rgba(0, 58, 122, 0.6);
+    --card-bg-hover: rgba(0, 70, 140, 0.7);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --card-border-hover: rgba(255, 255, 255, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --font-family: 'Inter', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color-end);
+    /* Complex radial gradient mimicking the deep blue space-like glow from the reference */
+    background-image: 
+        radial-gradient(circle at 50% -10%, var(--bg-glow-1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 110%, var(--bg-glow-2) 0%, transparent 60%),
+        linear-gradient(to bottom, var(--bg-color-start), var(--bg-color-end));
+    background-attachment: fixed;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard-container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 3rem 4rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+/* Typography styles to match the bold premium look */
+h1, h2, p, span, a {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+.user-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.user-id {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 0.1rem;
+}
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.nav-links a:hover {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+/* Main Content Area */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    flex: 1;
+}
+/* Grid for the top two cards */
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    width: 100%;
+    max-width: 1000px;
+}
+/* Base Card Styles (Glassmorphism) */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 3rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+/* Subtle inner glow for cards */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    border-radius: 24px;
+}
+
+/* Balance Card */
+.balance-card {
+    width: 100%;
+    max-width: 900px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 4rem;
+    border-radius: 20px;
+}
+/* Typography inside cards */
+.amount {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.balance-card .amount {
+    margin-bottom: 0;
+    font-size: 3rem;
+}
+.label {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+}
+
+.balance-card .label {
+    font-size: 1.75rem;
+}
+/* Responsive Design */
+@media (max-width: 900px) {
+    .dashboard-container {
+        padding: 2rem;
+    }
+    .top-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .nav-links {
+        width: 100%;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .stat-card {
+        min-height: 220px;
+        padding: 2rem;
+    }
+    .balance-card {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .amount {
+        font-size: 2.5rem;
+    }
+}

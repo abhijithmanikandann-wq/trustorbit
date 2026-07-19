@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Portal</title>
+    <meta name="description" content="A sleek, modern dashboard portal with rich aesthetics.">
+    <link rel="stylesheet" href="talenthome.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons for high quality modern icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <div class="user-info">
+                    <h1 class="user-name">Name</h1>
+                    <p class="user-id">User ID</p>
+                </div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="nav-item">HELP</a>
+                <a href="#" class="nav-item">SUPPORT</a>
+                <a href="#" class="nav-item">CONTACT US</a>
+                <a href="#" class="nav-item">ABOUT US</a>
+            </nav>
+        </header>
+        <!-- Main Content (Cards) -->
+        <main class="dashboard-grid">
+            <a href="earn track/earntrack.html" class="card" id="card-earnings">
+                <div class="card-icon">
+                    <i class="ph ph-currency-dollar"></i>
+                </div>
+                <h2 class="card-title">Earnings<br>Tracker</h2>
+            </a>
+            <a href="active contract/activecontract.html" class="card" id="card-contracts">
+                <div class="card-icon">
+                    <!-- Note pencil is close to a document with a pen -->
+                    <i class="ph ph-note-pencil"></i>
+                </div>
+                <h2 class="card-title">Active<br>Contracts</h2>
+            </a>
+          <a href="search tab/searchtab.html" class="card" id="card-search">
+                <div class="card-icon">
+                    <i class="ph ph-magnifying-glass"></i>
+                </div>
+                <h2 class="card-title">Search</h2>
+            </a>
+            <a href="projectbanner/projectbanner.html" class="card" id="card-requests">
+                <div class="card-icon">
+                    <i class="ph ph-file-text"></i>
+                </div>
+                <h2 class="card-title">Requests</h2>
+            </a>
+            <a href="messages/tmessages.html" class="card" id="card-messages">
+                <div class="card-icon">
+                    <i class="ph ph-bell"></i>
+                </div>
+                <h2 class="card-title">Messages</h2>
+            </a>
+        </main>
+    </div>
+
+    <script src="talenthome.js"></script>
+</body>
+</html>

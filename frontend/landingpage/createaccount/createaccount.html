@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <meta name="description" content="Registration form based on reference design">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="createaccount.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Enter Your Details</h1>
+        <form id="registrationForm">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Name" required class="w-large">
+            </div>
+            
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email" required class="w-medium">
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="dob" placeholder="DOB" onfocus="(this.type='date')" onblur="if(!this.value) this.type='text'" required class="w-small">
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="username" placeholder="User Name" required class="w-medium">
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="password" placeholder="New Password" required class="w-medium-small">
+            </div>
+            
+            <div class="input-group">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required class="w-medium-small">
+            </div>
+            
+            <div class="input-group">
+                <select id="country" required class="w-xsmall">
+                    <option value="" disabled selected>Country</option>
+                    <option value="us">United States</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="ca">Canada</option>
+                    <option value="au">Australia</option>
+                    <option value="in">India</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+                        <div class="role-selection">
+                <button type="button" class="role-btn" data-role="client">Client</button>
+                <button type="button" class="role-btn" data-role="talent">Talent</button>
+                <input type="hidden" id="selectedRole" required>
+            </div>
+            
+            <div class="submit-group">
+                <button type="submit" class="create-btn">Create</button>
+            </div>
+        </form>
+    </main>
+    <script src="createaccount.js"></script>
+</body>
+</html>

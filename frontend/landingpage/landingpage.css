@@ -1,0 +1,269 @@
+:root {
+    --bg-color: #030b1c;
+    --text-color: #FFFFFF;
+    --accent-blue: #5b92e5;
+    --grid-line-color: rgba(255, 255, 255, 0.1);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(ellipse at 50% -20%, #17428c 0%, var(--bg-color) 70%);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+/* Background Grid Lines */
+.background-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+.line {
+    position: absolute;
+    background-color: var(--grid-line-color);
+}
+.line.horizontal {
+    width: 100%;
+    height: 1px;
+}
+.line.vertical {
+    height: 100%;
+    width: 1px;
+}
+/* Navigation */
+.navbar {
+    padding: 40px 80px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 10;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 60px;
+}
+.nav-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+/* Main Content */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 80px 80px;
+    position: relative;
+    z-index: 10;
+}
+/* Quote Section */
+.quote-section {
+    position: relative;
+    margin-top: 50px;
+    margin-left: 50px;
+    max-width: 800px;
+}
+.quote-mark {
+    font-size: 7rem;
+    font-family: serif;
+    position: absolute;
+    color: #fff;
+    line-height: 1;
+    opacity: 0.9;
+}
+.quote-mark.open {
+    top: -50px;
+    left: -70px;
+}
+.quote-mark.close {
+    bottom: 20px;
+    right: 20%;
+}
+.headline {
+    font-size: 4.5rem;
+    line-height: 1.3;
+}
+.headline .line-1, .headline .line-2 {
+    display: flex;
+    gap: 15px;
+    align-items: baseline;
+}
+.headline .line-2 {
+    margin-left: 40px;
+}
+.headline .thin-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 3.5rem;
+}
+.headline .bold-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 5rem;
+}
+/* Bottom Section */
+.bottom-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: flex-end;
+    margin-right: 5%;
+}
+.btn {
+    text-decoration: none;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+}
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+.btn:hover::before {
+    left: 100%;
+}
+.btn:hover {
+    transform: scale(1.02);
+}
+.btn-login {
+    background: rgba(10, 25, 60, 0.3);
+    padding: 10px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
+    min-width: 380px;
+}
+.btn-login .btn-text {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-shadow: 0 0 15px rgba(91, 146, 229, 0.4);
+}
+.btn-login .arrow-icon svg {
+    width: 60px;
+    height: 60px;
+    stroke: rgba(255, 255, 255, 0.6);
+    transition: transform 0.3s ease, stroke 0.3s ease;
+}
+.btn-login:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+.btn-login:hover .arrow-icon svg {
+    transform: translateX(10px);
+    stroke: rgba(255, 255, 255, 0.9);
+}
+.btn-get-started {
+    background: transparent;
+    padding: 15px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 380px;
+}
+.btn-get-started .btn-text {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.9);
+}
+.btn-get-started .play-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease, fill 0.3s ease;
+}
+.btn-get-started:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+.btn-get-started:hover .play-icon svg {
+    transform: scale(1.1);
+    fill: rgba(255, 255, 255, 0.2);
+}
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.headline .line-1 {
+    animation: fadeUp 1s ease-out forwards;
+}
+.headline .line-2 {
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.3s forwards;
+}
+.action-buttons .btn {
+    opacity: 0;
+    animation: fadeUp 1s ease-out 0.6s forwards;
+}
+.action-buttons .btn-get-started {
+    animation-delay: 0.8s;
+}
+@media (max-width: 1200px) {
+    .headline .bold-text { font-size: 4rem; }
+    .headline .thin-text { font-size: 3rem; }
+    .quote-mark { font-size: 5rem; }
+}
+@media (max-width: 768px) {
+    .navbar { padding: 20px; }
+    .nav-links { gap: 20px; }
+    .nav-links a { font-size: 0.7rem; }
+    
+    .content { padding: 0 30px 40px; }
+    
+    .headline .bold-text { font-size: 3rem; }
+    .headline .thin-text { font-size: 2rem; }
+    .headline .line-2 { margin-left: 20px; }
+    
+    .bottom-section { flex-direction: column; align-items: flex-start; gap: 40px; }
+    
+    .action-buttons { width: 100%; align-items: center; margin-right: 0; }
+    .btn-login, .btn-get-started { min-width: 100%; }
+}
