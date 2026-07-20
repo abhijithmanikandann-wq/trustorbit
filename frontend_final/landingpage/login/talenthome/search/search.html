@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Grid Interface</title>
+    <link rel="stylesheet" href="search.css">
+    <!-- Google Fonts for typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Canvas for topographical background effect -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <div class="content-overlay">
+        <header class="top-bar">
+            <button class="back-button" aria-label="Go back">
+                <svg viewBox="0 0 24 24" width="28" height="28" stroke="#111" stroke-width="4" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="SEARCH">
+            </div>
+        </header>
+        
+        <main class="grid-container" id="grid">
+            <!-- Cards will be injected by JavaScript -->
+        </main>
+    </div>
+    <script src="search.js"></script>
+</body>
+</html>

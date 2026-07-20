@@ -1,0 +1,199 @@
+:root {
+    --bg-color: #386849;
+    --card-bg: rgba(43, 85, 59, 0.4);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #d2e482;
+    --text-secondary: #a5b399;
+    --text-nav: #c5d378;
+    --card-text-icon: #9ba93b;
+    --avatar-bg: #d8e5db;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    /* Soft gradient to mimic depth */
+    background: radial-gradient(circle at top left, #457856, #2d583c);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Wavy background pattern to simulate the topographical lines */
+.background-texture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: repeating-radial-gradient(
+        circle at 0 0,
+        transparent 0,
+        var(--bg-color) 40px
+      ),
+      repeating-linear-gradient(
+        var(--bg-color),
+        #244a30 20px
+      );
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+}
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.avatar {
+    width: 70px;
+    height: 70px;
+    background-color: var(--avatar-bg);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+.name {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+.user-id {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.nav-links {
+    display: flex;
+    gap: 50px;
+    margin-top: 15px;
+}
+.nav-links a {
+    color: var(--text-nav);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    position: relative;
+}
+.nav-links a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(50, 95, 68, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+.icon-wrapper {
+    margin-bottom: 40px;
+    font-size: 90px;
+    color: var(--card-text-icon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+.card:hover .icon-wrapper {
+    transform: scale(1.1);
+}
+.card h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--card-text-icon);
+    text-align: center;
+    line-height: 1.2;
+    margin: 0;
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .top-nav {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .nav-links {
+        margin-top: 0;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Interface</title>
+    <link rel="stylesheet" href="client_act_con.css">
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" id="backBtn" aria-label="Go back">
+            <div class="chevron"></div>
+        </button>
+    </div>
+    
+    <main class="chat-container" id="chatContainer">
+        <!-- Message 1 -->
+        <article class="message-wrapper">
+            <div class="message-bg"></div>
+            <div class="message-content">
+                <header class="message-header">..</header>
+                <div class="message-body">
+                  ..
+                    
+                </div>
+                <footer class="message-time">..</footer>
+            </div>
+        </article>
+        <!-- Message 2 -->
+        <article class="message-wrapper">
+            <div class="message-bg" style="transform: rotate(-1deg); top: -2px; left: 4px;"></div>
+            <div class="message-content" style="transform: rotate(0.5deg);">
+                <header class="message-header">..</header>
+                <div class="message-body">
+                   ..
+                    
+                </div>
+                <footer class="message-time">..</footer>
+            </div>
+        </article>
+        <!-- Message 3 -->
+        <article class="message-wrapper">
+            <div class="message-bg" style="transform: rotate(1.5deg); top: 6px; left: -3px;"></div>
+            <div class="message-content" style="transform: rotate(-1deg);">
+                <header class="message-header">..</header>
+                <div class="message-body">
+                   ..
+                    
+                </div>
+                <footer class="message-time">..</footer>
+            </div>
+        </article>
+    </main>
+    <script src="client_act_con.js"></script>
+</body>
+</html>

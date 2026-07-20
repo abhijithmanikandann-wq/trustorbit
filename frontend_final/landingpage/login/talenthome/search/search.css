@@ -1,0 +1,187 @@
+:root {
+    --bg-base: #467957;
+    --grid-line: rgba(255, 255, 255, 0.05);
+    --card-bg: #1e452d;
+    --card-shadow: rgba(0, 0, 0, 0.25);
+    --yellow-light: #fffbc2;
+    --yellow-dark: #d6ba38;
+    --black: #1a1a1a;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--bg-base);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+/* Subtle underlying grid pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 100px 100px;
+    z-index: 0;
+    pointer-events: none;
+}
+/* Background canvas positioning */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.5; /* Blends with the base green */
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding: 3rem 4rem;
+    gap: 1.5rem;
+}
+.back-button {
+    width: 64px;
+    height: 52px;
+    background-color: var(--yellow-dark);
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Keeps it rectangular, easily changeable */
+}
+/* A slight notch effect on the back button to match reference style */
+.back-button::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--bg-base);
+}
+.back-button:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px rgba(0, 0, 0, 0.2);
+}
+
+.back-button svg {
+    /* Push slightly right to account for the notch */
+    transform: translateX(2px); 
+}
+.search-container {
+    flex-grow: 1;
+    max-width: 1200px;
+    position: relative;
+}
+.search-input {
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: var(--yellow-light);
+    border: none;
+    font-size: 1.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--black);
+    box-shadow: 8px 8px 0px var(--yellow-dark);
+    outline: none;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+.search-input::placeholder {
+    color: #444;
+    letter-spacing: 2px;
+}
+.search-input:focus {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0px var(--yellow-dark);
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    padding: 1rem 4rem 5rem 4rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+}
+@media (max-width: 1400px) {
+    .grid-container {
+        gap: 2rem;
+        padding: 1rem 3rem 4rem 3rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .top-bar {
+        padding: 2rem 3rem;
+    }
+}
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1rem 2rem 3rem 2rem;
+    }
+    .top-bar {
+        padding: 1.5rem 2rem;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .back-button {
+        align-self: flex-start;
+    }
+}
+.card {
+    background-color: var(--card-bg);
+    aspect-ratio: 4/3;
+    position: relative;
+    box-shadow: 12px 12px 0px var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    /* Soft blend */
+    opacity: 0.95;
+}
+.card:hover {
+    transform: translateY(-8px) translateX(-4px);
+    box-shadow: 16px 20px 0px rgba(0,0,0,0.3);
+}
+.card-dots {
+    display: flex;
+    gap: 6px;
+}
+.dot {
+    width: 12px;
+    height: 10px;
+    background-color: #fce700;
+}

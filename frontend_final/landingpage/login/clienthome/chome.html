@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="chome.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-texture"></div>
+    <div class="container">
+        <header class="top-nav">
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <div class="user-info">
+                    <h1 class="name">Name</h1>
+                    <span class="user-id">User ID</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#">HELP</a>
+                <a href="#">SUPPORT</a>
+                <a href="#">CONTACT US</a>
+                <a href="#">ABOUT US</a>
+            </nav>
+        </header>
+        <main class="card-grid">
+            <div class="card" role="link" tabindex="0" data-route="activecontracts/client_act_con.html">
+                <div class="icon-wrapper">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </div>
+                <h2>Active<br>Contracts</h2>
+            </div>
+            <div class="card" role="link" tabindex="0" data-route="newproject/newproject.html">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h2>New<br>Project</h2>
+            </div>
+            <div class="card" role="link" tabindex="0" data-route="messages/client_messages.html">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+                <h2>Messages</h2>
+            </div>
+        </main>
+    </div>
+    <script src="chome.js"></script>
+</body>
+</html>

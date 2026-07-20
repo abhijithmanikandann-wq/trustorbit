@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #3e6d4c; /* Base green */
+    /* Using a repeating radial gradient to simulate the topographic line pattern from the image */
+    background-image: 
+        radial-gradient(circle at 50% 100%, rgba(20, 45, 25, 0.2) 0%, transparent 60%),
+        repeating-radial-gradient(circle at 30% 60%, 
+            rgba(0,0,0,0) 0, 
+            rgba(0,0,0,0) 15px, 
+            rgba(0,0,0,0.04) 15px, 
+            rgba(0,0,0,0.04) 16px
+        ),
+        repeating-radial-gradient(circle at 70% 30%, 
+            rgba(0,0,0,0) 0, 
+            rgba(0,0,0,0) 25px, 
+            rgba(0,0,0,0.03) 25px, 
+            rgba(0,0,0,0.03) 26px
+        );
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+/* Yellow tag on the top left */
+.yellow-tag {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: #d1d848;
+    width: 65px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    border-radius: 6px;
+    border: 0;
+    padding: 0;
+    /* Optional: making it look like a flag cutting in */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 15% 50%);
+}
+.yellow-tag:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+.container {
+    display: flex;
+    gap: 40px;
+    z-index: 1;
+}
+
+.card {
+    background: rgba(30, 65, 42, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 32px;
+    width: 340px;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    opacity: 0.6;
+}
+.card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255,255,255,0.1);
+    background: rgba(30, 65, 42, 0.6);
+}
+.icon-container {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 35px;
+    color: #9eb95d;
+    transition: transform 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card:hover .icon-container {
+    transform: scale(1.1) rotate(-3deg);
+}
+.icon-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+h2 {
+    color: #9eb95d;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+/* Adding a subtle glow effect to text on hover */
+.card:hover h2 {
+    text-shadow: 0 0 15px rgba(158, 185, 93, 0.3);
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .card {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .yellow-tag {
+        top: 20px;
+        left: 20px;
+    }
+}

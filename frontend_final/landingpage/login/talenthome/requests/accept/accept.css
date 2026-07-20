@@ -1,0 +1,196 @@
+:root {
+    --bg-color-main: #3C7053;
+    --card-bg: rgba(20, 60, 30, 0.7);
+    --title-color: #D3E050;
+    --text-color: #A3C9A6;
+    --btn-reject: #A1A966;
+    --btn-accept: #EAF4B4;
+    --accent-yellow: #D8D455;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color-main);
+    color: var(--text-color);
+}
+/* Background Wavy Pattern */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* A repeating SVG pattern resembling topographical lines */
+    background-color: var(--bg-color-main);
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 25 C 20 25, 30 15, 50 15 C 70 15, 80 25, 100 25 M0 50 C 20 50, 30 40, 50 40 C 70 40, 80 50, 100 50 M0 75 C 20 75, 30 65, 50 65 C 70 65, 80 75, 100 75' stroke='rgba(0,0,0,0.1)' stroke-width='1' fill='none' /%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.8;
+}
+/* Back Button */
+.back-btn {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 60px;
+    height: 50px;
+    background-color: var(--accent-yellow);
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    z-index: 10;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+.back-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px; /* Adjust for clip-path skew */
+}
+/* Main Container */
+.promo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+/* Card Styling */
+.promo-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 60px;
+    width: 90%;
+    max-width: 800px;
+    /* Subtle skew to match reference */
+    transform: skewX(-2deg) rotate(-1deg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    position: relative;
+}
+/* Header (Avatar & Name) */
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    transform: skewX(2deg) rotate(1deg); /* un-skew inner content */
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #E2E8F0;
+    border-radius: 50%;
+    margin-right: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.user-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--title-color);
+}
+/* Content */
+.card-content {
+    text-align: center;
+    transform: skewX(2deg) rotate(1deg); /* un-skew inner content */
+}
+.main-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--title-color);
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+.sub-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 40px;
+}
+.description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+/* Buttons Container */
+.action-buttons {
+    display: flex;
+    gap: 150px;
+    margin-top: -30px; /* Overlap with card */
+    z-index: 5;
+    transform: skewX(0deg) rotate(0deg);
+}
+.btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1A3A25;
+    border: none;
+    padding: 15px 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+/* Reject Button */
+.btn-reject {
+    background-color: var(--btn-reject);
+    clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+    transform: rotate(1deg);
+}
+.btn-reject:hover {
+    transform: rotate(1deg) translateY(-3px);
+    filter: brightness(1.1);
+}
+/* Accept Button */
+.btn-accept {
+    background-color: var(--btn-accept);
+    clip-path: polygon(0% 0%, 95% 0%, 100% 100%, 5% 100%);
+    transform: rotate(-1deg);
+}
+.btn-accept:hover {
+    transform: rotate(-1deg) translateY(-3px);
+    filter: brightness(1.1);
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    .action-buttons {
+        gap: 20px;
+        flex-direction: column;
+        margin-top: 30px;
+    }
+    .btn {
+        clip-path: none !important;
+        transform: none !important;
+        border-radius: 8px;
+    }
+    .promo-card {
+        transform: none;
+   }
+    .card-content, .card-header {
+        transform: none;
+    }
+}

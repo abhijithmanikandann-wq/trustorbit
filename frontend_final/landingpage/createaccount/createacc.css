@@ -1,0 +1,164 @@
+:root {
+    --bg-color: #4f8763;
+    --paper-color: #f7f9ce;
+    --text-color: #2b4f35;
+    --title-color: #d1b849;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.background-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.15;
+    background-image: 
+        repeating-radial-gradient( circle at 0 0, transparent 0, var(--bg-color) 40px ), 
+        repeating-linear-gradient( #2a5a3b, #2a5a3b );
+    /* Abstract wavy SVG would be better, but simulating it with CSS */
+}
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+}
+.back-btn {
+    position: absolute;
+    top: 10px;
+    left: -40px;
+    background-color: #d1b849;
+    border: none;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-3deg);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
+}
+.back-btn svg {
+    width: 24px;
+    height: 24px;
+    color: var(--text-color);
+}
+.form-title {
+    color: var(--title-color);
+    font-size: 24px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.form-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.two-cols {
+    gap: 20px;
+    justify-content: space-between;
+    width: 80%;
+}
+input {
+    background-color: var(--paper-color);
+    border: none;
+    padding: 12px 15px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--text-color);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    outline: none;
+}
+input::placeholder {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+.two-cols input {
+    width: 48%;
+}
+.wide-input {
+    width: 80%;
+}
+.medium-input {
+    width: 50%;
+}
+/* Tape styling for inputs to make them look slightly irregular */
+input {
+    clip-path: polygon(1% 1%, 99% 0%, 100% 99%, 0% 100%);
+}
+input:focus {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+.role-selection {
+    gap: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.role-btn {
+    background-color: var(--paper-color);
+    border: none;
+    padding: 15px 30px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+}
+.role-btn[data-role="client"] {
+    transform: rotate(2deg);
+    clip-path: polygon(2% 3%, 98% 1%, 99% 98%, 1% 99%);
+}
+.role-btn[data-role="talent"] {
+    transform: rotate(-2deg);
+    clip-path: polygon(1% 1%, 99% 2%, 97% 99%, 2% 98%);
+}
+.role-btn.active {
+    background-color: #e5e8a5;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.submit-btn {
+    background-color: var(--paper-color);
+    border: none;
+    padding: 12px 35px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
+    cursor: pointer;
+    box-shadow: 2px 3px 6px rgba(0,0,0,0.2);
+    transform: rotate(1deg);
+    clip-path: polygon(1% 0%, 99% 2%, 98% 99%, 0% 98%);
+}
+.submit-btn:hover {
+    background-color: #e5e8a5;
+}

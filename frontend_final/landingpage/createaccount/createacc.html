@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="createacc.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div class="container">
+        <button class="back-btn" aria-label="Go Back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        
+        <h1 class="form-title">ENTER YOUR DETAILS</h1>
+        
+        <form id="registrationForm" class="registration-form">
+            <div class="form-row two-cols">
+                <input type="text" id="firstName" placeholder="FIRST NAME" required>
+                <input type="text" id="lastName" placeholder="LAST NAME" required>
+            </div>
+            
+            <div class="form-row">
+                <input type="email" id="email" placeholder="EMAIL" required class="wide-input">
+            </div>
+            
+            <div class="form-row">
+                <input type="text" id="dob" placeholder="DOB" onfocus="(this.type='date')" onblur="(this.value == '' ? this.type='text' : this.type='date')" required class="medium-input">
+            </div>
+            
+            <div class="form-row">
+                <input type="text" id="userId" placeholder="USER ID" required class="wide-input">
+            </div>
+            
+            <div class="form-row">
+                <input type="password" id="newPassword" placeholder="NEW PASSWORD" required class="wide-input">
+            </div>
+            
+            <div class="form-row">
+                <input type="password" id="reenterPassword" placeholder="RE-ENTER PASSWORD" required class="wide-input">
+            </div>
+            
+            <div class="form-row role-selection">
+                <button type="button" class="role-btn active" data-role="client">CLIENT</button>
+                <button type="button" class="role-btn" data-role="talent">TALENT</button>
+                <input type="hidden" id="selectedRole" value="client">
+            </div>
+                   <div class="form-row submit-row">
+                <button type="submit" class="submit-btn">CREATE</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="createacc.js"></script>
+</body>
+</html>

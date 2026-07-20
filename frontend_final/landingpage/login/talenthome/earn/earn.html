@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <meta name="description" content="A beautiful financial dashboard UI based on your design reference.">
+    <link rel="stylesheet" href="earn.css">
+    <!-- Using Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <!-- Abstract wavy background -->
+    <div class="background-texture" id="bg-texture"></div>
+
+    <header>
+        <button class="profile-section" type="button" aria-label="Back to dashboard">
+            <div class="avatar"></div>
+            <div class="user-info">
+                <h1>Name</h1>
+                <p>User ID</p>
+            </div>
+        </button>
+    </header>
+
+    <main class="dashboard-container">
+        <!-- Top Left Card -->
+        <section class="card card-left">
+            <h1 class="amount" id="total-earning">$</h1>
+            <p class="label">Total Earning</p>
+        </section>
+
+        <!-- Top Right Card -->
+        <section class="card card-right">
+            <h1 class="amount" id="to-get">$</h1>
+            <p class="label">How Much To Get</p>
+        </section>
+
+        <!-- Bottom Center Card -->
+        <section class="card card-bottom">
+            <p class="label">Balance</p>
+            <h1 class="amount" id="balance">$</h1>
+        </section>
+    </main>
+
+    <script src="earn.js"></script>
+</body>
+</html>

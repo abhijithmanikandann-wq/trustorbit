@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+body {
+    background-color: #5b8764; /* Matching the green from the image */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+/* Creating a topographic-like wave effect for the background */
+.bg-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    z-index: 0;
+    background-image: 
+        radial-gradient(circle at 100% 50%, transparent 20%, #000 21%, #000 34%, transparent 35%, transparent),
+        radial-gradient(circle at 0% 50%, transparent 20%, #000 21%, #000 34%, transparent 35%, transparent);
+    background-size: 100px 200px;
+    background-position: 0 0, 50px 100px;
+}
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: #dbe476;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(0 10%, 100% 0, 90% 100%, 10% 90%);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.logo svg {
+    width: 24px;
+    height: 24px;
+}
+/* Title Styling */
+.title {
+    color: #cdd54d;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    margin-left: 8rem; /* Align relative to the logo somewhat */
+}
+/* Form Container */
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+input, textarea {
+    background-color: #eef2c2;
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #333;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+input::placeholder, textarea::placeholder {
+    color: #333;
+    font-weight: 300;
+}
+input:focus, textarea:focus {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+/* Specific widths matching the design */
+.input-medium {
+    width: 50%;
+    max-width: 450px;
+}
+.input-narrow {
+    width: 30%;
+    max-width: 250px;
+}
+.input-wide {
+    width: 70%;
+    max-width: 650px;
+    resize: none;
+}
+/* Submit Button */
+.submit-btn {
+    background-color: #eef2c2;
+    border: none;
+    padding: 0.8rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #2b4532;
+    cursor: pointer;
+    margin-top: 1rem;
+    clip-path: polygon(2% 0, 100% 2%, 98% 100%, 0 98%);
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+    background-color: #f7fad7;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
